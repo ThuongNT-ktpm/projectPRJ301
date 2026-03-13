@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.UserDAO;
+import model.User;
 
 /**
  *
@@ -60,7 +60,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+       request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
+
     }
 
     /**
@@ -74,14 +75,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("name");
-        String pass = request.getParameter("password");
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
         if ("admin".equals(user) && "123".equals(pass)) {
-            request.getRequestDispatcher("view/dashboard/dashboard.jsp").forward(request, response);
+            response.sendRedirect("dashboard");
         } else {
             request.setAttribute("wrong", "Wrong username or password");
 
-            request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
+             request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
         }
     }
 
