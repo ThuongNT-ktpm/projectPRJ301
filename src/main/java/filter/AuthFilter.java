@@ -136,7 +136,7 @@ public class AuthFilter implements Filter {
             }
         }
 
-        // Các URL khác thì Admin và Staff đều được
+        // Các trang khác thì admin và staff đều được vào
         chain.doFilter(request, response);
     }
     /**
